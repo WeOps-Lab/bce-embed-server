@@ -1,8 +1,13 @@
 import uvicorn
+from langserve import add_routes
+
 from core.server_settings import server_settings
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
+
+from runnable.bce_embed_runnable import BCEEmbedRunnable
+from runnable.bce_rerank_runnable import BCEReRankRunnable
 
 
 class Bootstrap:
@@ -21,7 +26,8 @@ class Bootstrap:
         )
 
     def setup_router(self):
-        pass
+        add_routes(self.app, BCEReRankRunnable().instance(), path="/rerank")
+        add_routes(self.app, BCEEmbedRunnable().instance(), path="/embed")
 
     def start(self):
         self.setup_middlewares()

@@ -4,3 +4,5 @@ langserve[all]==0.2.2
 langchain-community==0.2.10
 python-dotenv==1.0.1
 cython==3.0.10
+
+bcembedding==0.1.5
